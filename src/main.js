@@ -13,7 +13,8 @@ require("dotenv").config();
 
 const CONFIG = {
     HOST: process.env.HOST || "localhost",
-    PORT: process.env.PORT || 7777
+    PORT: process.env.PORT || 8080,
+    HOSTING: process.env.HOSTING === "true" || false
 }
 
 app.use(express.json());
@@ -62,7 +63,7 @@ app.post("/qr/base64", (req, res) => {
     if (err) return res.status(500).json({ message: "server error" });
   });
 
-  const full_file_url = CONFIG.PORT == 80 ? `http://${CONFIG.HOST}/files/${file_name}` : `http://${CONFIG.HOST}:${CONFIG.PORT}/files/${file_name}`;
+  const full_file_url = CONFIG.HOSTING ? `http://${CONFIG.HOST}/files/${file_name}` : `http://${CONFIG.HOST}:${CONFIG.PORT}/files/${file_name}`;
 
   qrcode.toDataURL(full_file_url, (err, url) => {
     if (err) return res.status(500).json({ message: "server error" });
@@ -86,6 +87,11 @@ app.use((req, res) => {
    res.sendFile(path.join(__dirname, "/404.html")); 
 });
 
-app.listen(CONFIG.PORT, CONFIG.HOST, () => {
-  console.log(`http://${CONFIG.HOST}:${CONFIG.PORT}/`);
-});
+console.log(CONFIG.HOSTING == true);
+
+
+if(!CONFIG.HOSTING) {
+  app.listen(CONFIG.PORT, CONFIG.HOST, () => {
+    console.log(`http://${CONFIG.HOST}:${CONFIG.PORT}/`);
+  });
+} else app.listen(CONFIG.PORT, () => {});
