@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const path = require("node:path");
+const path = require("path");
 const fileUpload = require("express-fileupload");
 
 const fs = require("fs");
@@ -94,4 +94,4 @@ if(!CONFIG.HOSTING) {
   app.listen(CONFIG.PORT, CONFIG.HOST, () => {
     console.log(`http://${CONFIG.HOST}:${CONFIG.PORT}/`);
   });
-} else app.listen(CONFIG.PORT, () => {});
+} else app.listen(80, () => {});
