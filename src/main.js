@@ -62,7 +62,9 @@ app.post("/qr/base64", (req, res) => {
     if (err) return res.status(500).json({ message: "server error" });
   });
 
-  qrcode.toDataURL(`http://${CONFIG.HOST}:${CONFIG.PORT}/files/${file_name}`, (err, url) => {
+  const full_file_url = CONFIG.PORT == 80 ? `http://${CONFIG.HOST}/files/${file_name}` : `http://${CONFIG.HOST}:${CONFIG.PORT}/files/${file_name}`;
+
+  qrcode.toDataURL(full_file_url, (err, url) => {
     if (err) return res.status(500).json({ message: "server error" });
 
     const img_data = url.replace(/^data:image\/\w+;base64,/, "");
