@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="app.css">
+
+    <link rel="shortcut icon" href="fav.png" type="image/x-icon">
+
+    <title>QRCoder</title>
+</head>
+<body>
+    <div class="app-wrapper">
+        <h1>QRCoder [mental@chaos]</h1>
+        <input type="text" placeholder="Значение" class="data-input">
+        <label class="data-input file-picker" for="file">
+            <img src="file.svg" alt="file">
+            <small>Загрузить файл</small>
+            <input id="file" type="file" class="file-picker-input">
+        </label>
+
+        <img class="qrcode" src="blank.png" alt="">
+        <a href="" target="_blank" download="" class="save-btn">Сохранить</a>
+
+        <div class="app-social">
+            <a class="social-btn" href="https://t.me/mentalchaos0x2b" target="_blank">
+                <img src="tg.svg" alt="Telegram">
+                <small>Telegram</small>
+            </a>
+            <a class="social-btn" href="https://github.com/mentalchaos0x2b" target="_blank">
+                <img src="github.svg" alt="Telegram">
+                <small>Github</small>
+            </a>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
