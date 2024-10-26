@@ -4,6 +4,9 @@ const environment = {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    getStorageInfo();
+
     document.querySelector(".data-input").addEventListener("keyup", (e) => {
         if(e.key === "Enter") {
             qrcodeRequest();
@@ -11,7 +14,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.querySelector(".file-picker-input").addEventListener("change", (e) => qrcodeFromFileRequest(e));
+
+    document.querySelector(".files-weight").addEventListener("click", () => clearStorage());
 });
+
+const getStorageInfo = async () => {
+    document.querySelector(".current-files-weight").innerHTML = "...";
+    const response = await fetch('/storage/info', {method: 'GET'});
+    const result = await response.json();
+    document.querySelector(".current-files-weight").innerHTML = result.size;
+}
+
+const clearStorage = async () => {
+    const confirmation = confirm('Вы уверены, что хотите очистить хранилище?\nВсе QR-коды, ранее сгенерированные из файлов, перестанут работать.\nЭто действие необратимо.');
+
+    if (!confirmation) return;
+
+    document.querySelector('.save-btn').style.display = 'none';
+    document.querySelector('.qrcode').style.display = 'none';
+
+    const response = await fetch('/storage/clear', {method: 'GET'});
+    const result = await response.json();
+
+    getStorageInfo();
+}
 
 const qrcodeFromFileRequest = async (e) => {
     const file = e.target.files[0];
@@ -36,6 +62,8 @@ const qrcodeFromFileRequest = async (e) => {
 
     document.querySelector('.save-btn').style.display = 'flex';
     document.querySelector('.qrcode').style.display = 'flex';
+
+    getStorageInfo();
 }
 
 const qrcodeRequest = async () => {
@@ -56,4 +84,6 @@ const qrcodeRequest = async () => {
 
     document.querySelector('.save-btn').style.display = 'flex';
     document.querySelector('.qrcode').style.display = 'flex';
+
+    getStorageInfo();
 }

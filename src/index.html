@@ -8,12 +8,12 @@
 
     <link rel="shortcut icon" href="fav.png" type="image/x-icon">
 
-    <title>QRCoder</title>
+    <title>QRCoder - Генерация QR-Кодов</title>
 </head>
 <body>
     <div class="app-wrapper">
         <h1>QRCoder [mental@chaos]</h1>
-        <input type="text" placeholder="Значение" class="data-input">
+        <input type="text" placeholder="Текст, URL или любоое значение" class="data-input">
         <label class="data-input file-picker" for="file">
             <img src="file.svg" alt="file">
             <small>Загрузить файл</small>
@@ -22,6 +22,8 @@
 
         <img class="qrcode" src="blank.png" alt="">
         <a href="" target="_blank" download="" class="save-btn">Сохранить</a>
+
+        <small class="files-weight">Общий вес файлов: <span class="current-files-weight">0Mb</span></small>
 
         <div class="app-social">
             <a class="social-btn" href="https://t.me/mentalchaos0x2b" target="_blank">
